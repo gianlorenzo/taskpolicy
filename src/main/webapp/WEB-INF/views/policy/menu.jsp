@@ -8,8 +8,7 @@
                 <li class="special"><a href="#menu" class="menuToggle"><span>Menu</span></a>
                     <div id="menu">
                         <ul>
-                            <li><a href="/toSetPolicy">Definisci politica di Assegnazione</a></li>
-                            <li><a href="">Selezione politica di Assegnazione</a></li>
+                            <li><a href="/">Torna alla Home</a></li>
                         </ul>
                     </div>
                 </li>
