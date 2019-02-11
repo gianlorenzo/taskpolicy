@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = false)
@@ -35,6 +38,42 @@ public class ResultDaoImpl implements ResultDaoCustom {
             }
         }
     }
+
+    @Override
+    public List<Result> findResultByImage(Long id) {
+        String s = "FROM Result r WHERE r.image.id='" + id + "'";
+        Query query= this.entityManager.createQuery(s);
+        List<Result> results = query.getResultList();
+        return results;
+
+    }
+
+    @Override
+    public List<BigInteger> findResultWithNoNullAnswer(Long id) {
+        List<Object> resultList;
+        Result r;
+        List<BigInteger> resultsId;
+        String s = "select r.id from result r where r.image_id='"+id+"' and r.answer is not null";
+        Query query = this.entityManager.createNativeQuery(s);
+        resultsId = query.getResultList();
+        //String s = "select r.id,r.answer,r.image_id,r.task_id from result r where r.image_id = ?1 and r.answer is not null";
+        //Query query = this.entityManager.createNativeQuery(s).setParameter(1,id);
+        //resultList = query.getResultList();
+        /*for (int i = 0;i<resultList.size();i++) {
+            r = (Result)resultList.get(i);
+            results.add(r);
+        }*/
+        return resultsId;
+    }
+
+    @Override
+    public Long findTaskByImage(Long id) {
+        String s = "SELECT r.task.id FROM result r WHERE r.image.id='" + id + "' order by rand() ";
+        Query query = this.entityManager.createQuery(s);
+        Long taskId = (Long)query.getSingleResult();
+        return taskId;
+    }
+
 
     @Override
     public void addImageAdnTaskToResult(Task t, Result r, Job j) {

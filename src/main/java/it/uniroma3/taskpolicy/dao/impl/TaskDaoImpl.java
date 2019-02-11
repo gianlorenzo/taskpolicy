@@ -3,6 +3,7 @@ package it.uniroma3.taskpolicy.dao.impl;
 
 
 import it.uniroma3.taskpolicy.dao.TaskDaoCustom;
+import it.uniroma3.taskpolicy.model.Image;
 import it.uniroma3.taskpolicy.model.Result;
 import it.uniroma3.taskpolicy.model.Student;
 import it.uniroma3.taskpolicy.model.Task;
@@ -121,7 +122,6 @@ public class TaskDaoImpl implements TaskDaoCustom {
         return task;
     }
 
-    @SuppressWarnings("unchecked")
     public String findHintByTask(Task t) {
         String sr1 = "select answer, count(*) c from result where task_id in (select id from task where batch = ?1 and job_id = ?2) and answer is not null group by answer HAVING count(*) >= ?3 order by c";
 

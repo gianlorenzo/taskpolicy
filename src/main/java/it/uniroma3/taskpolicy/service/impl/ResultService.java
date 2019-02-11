@@ -9,6 +9,7 @@ import it.uniroma3.taskpolicy.model.TaskWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -41,5 +42,10 @@ public class ResultService {
         resultDao.addImageAdnTaskToResult(t, r, j);
     }
 
+    public List<Result> findResultByImage(Long id) { return this.resultDao.findResultByImage(id);}
 
-}
+    public Long findTaskByImage(Long id) {return this.resultDao.findTaskByImage(id);}
+
+    public List<BigInteger> findResultWithNoNullAnswer(Long id) {return this.resultDao.findResultWithNoNullAnswer(id);}
+
+    }
