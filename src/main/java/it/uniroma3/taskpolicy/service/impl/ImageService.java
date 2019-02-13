@@ -68,4 +68,7 @@ public class ImageService {
 
     public BigInteger findOneImageJob() { return this.imageDaoImpl.findOneImageJob(); }
 
+    public BigInteger findAllImageResult() { return this.imageDaoImpl.findAllImageResult();}
+
+
     }

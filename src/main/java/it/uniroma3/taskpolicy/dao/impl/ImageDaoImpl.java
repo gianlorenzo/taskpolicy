@@ -105,6 +105,17 @@ public class ImageDaoImpl implements ImageDaoCustom {
         return id.get(0);
     }
 
+    @Override
+    public BigInteger findAllImageResult() {
+        String s = "select image_id from result where answer is null order by random() limit 1";
+        Query query = this.entityManager.createNativeQuery(s);
+        List<BigInteger> id = query.getResultList();
+        if(id.size()!=0)
+            return id.get(0);
+        else
+            return null;
+    }
+
     public void insertImage(String p, Manuscript manuscript) throws FileNotFoundException, IOException {
         File file = new File(p);
         File[] subFiles = file.listFiles();

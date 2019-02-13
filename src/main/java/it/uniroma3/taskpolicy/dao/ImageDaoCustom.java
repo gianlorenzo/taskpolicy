@@ -24,5 +24,7 @@ public interface ImageDaoCustom {
 
     public BigInteger findOneImageJob();
 
+    public BigInteger findAllImageResult();
+
 
 }
