@@ -72,18 +72,20 @@ public class policy {
                     System.out.println("Sono nel ciclo for dei risultati non nulli");
                     System.out.println(r.getAnswer());
 
-                    if(r.getAnswer().equals("SI")) {
-                        countSi++;
-                    }
-                    if(r.getAnswer().equals("NO")) {
-                        countNo++;
-                        System.out.println("countNo:" + countNo);
+                    if(r.getTask().getJob().getTypology().equals("Trova_Intero_Simbolo")) {
+                        if (r.getAnswer().getClass().equals(String.class) && r.getAnswer().equals("SI")) {
+                            countSi++;
+                        }
+                        if (r.getAnswer().getClass().equals(String.class) && r.getAnswer().equals("NO")) {
+                            countNo++;
+                            System.out.println("countNo:" + countNo);
+                        }
                     }
                 }
 
-                if(Math.abs(countSi-countNo)>1 || Math.abs(countNo-countSi)>1)
+                if(Math.abs(countSi-countNo)>((resultWithNoNullAnswer.size()/2)+1) || Math.abs(countNo-countSi)>((resultWithNoNullAnswer.size()/2)+1))
                     return String.valueOf(this.imageService.findAllImageResult());
-                if(Math.abs(countSi-countNo)==1 || Math.abs(countNo-countSi)==1)
+                if(Math.abs(countSi-countNo)<=((resultWithNoNullAnswer.size()/2)+1) || Math.abs(countNo-countSi)<=((resultWithNoNullAnswer.size()/2)+1))
                     return String.valueOf(id.longValue());
             }
         }
