@@ -71,8 +71,9 @@ public class policy {
                 for (Result r : resultWithNoNullAnswer) {
                     System.out.println("Sono nel ciclo for dei risultati non nulli");
                     System.out.println(r.getAnswer());
-
+                    /*-------------------Task con risposta SI/NO-------------------------*/
                     if(r.getTask().getJob().getTypology().equals("Trova_Intero_Simbolo")) {
+                        System.out.println("Sono in trova intero simbolo"+"\n");
                         if (r.getAnswer().getClass().equals(String.class) && r.getAnswer().equals("SI")) {
                             countSi++;
                         }
@@ -80,6 +81,22 @@ public class policy {
                             countNo++;
                             System.out.println("countNo:" + countNo);
                         }
+                    }
+                    /*-------------------Task con risposta come colore-------------------------*/
+                    if(r.getTask().getJob().getTypology().equals("Trova_Parti_Colorate")) {
+                        if(r.getAnswer().startsWith("[")) {
+                            System.out.println("Sono in trova parti colorate" + "\n");
+                            System.out.println(r.getAnswer() + "\n");
+                            String s = r.getAnswer().replace("\"", "");
+                            System.out.println(s);
+                            String c = s.substring(s.indexOf("[")+1,s.indexOf("]"));
+                            System.out.println(c);
+                            String [] v = c.split(",");
+                            System.out.println(v[0]);
+                            System.out.println(v[1]);
+                        }
+
+
                     }
                 }
 
